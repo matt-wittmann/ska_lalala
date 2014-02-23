@@ -16,6 +16,21 @@ import javax.sound.sampled.SourceDataLine;
  * @author matt@mattwittmann.com
  */
 public class SoundExperiment {
+    private static final double C4 = 261.63;
+    private static final double D4 = 293.66;
+    private static final double E4 = 329.63;
+    private static final double F4 = 349.23;
+    private static final int G4 = 392;
+    private static final int A4 = 440;
+    private static final double B4 = 493.88;
+    private static final double C5 = 523.23;
+    private static final double D5 = 587.33;
+    private static final double E5 = 659.26;
+    private static final double F5 = 698.46;
+    private static final double G5 = 783.99;
+    private static final int A5 = 880;
+    private static final double B5 = 987.77;
+
 	ByteBuffer buffer;
 	SourceDataLine line;
 	float sampleRate;
@@ -46,7 +61,7 @@ public class SoundExperiment {
 		this(44100, 8);
 	}
 
-	public SoundExperiment play(int frequency, int duration) {
+	public SoundExperiment play(double frequency, int duration) {
 		double cycle = (double) frequency / (double) sampleRate;
 		int count = (int) ((sampleRate * duration) / 1000);
 		double cyclePosition = 0;
@@ -91,6 +106,11 @@ public class SoundExperiment {
 	}
 
 	public static void main(String[] args) {
-		new SoundExperiment(44100, 16).play(440, 100).play(410, 200).play(440, 100).close();
+        // Scale, ascending, descending
+		new SoundExperiment(44100, 16).play(C4, 200).play(D4, 200).play(E4, 200).play(F4, 200)
+                                      .play(G4, 200).play(A4, 200).play(B4, 200).play(A4, 200)
+                                      .play(G4, 200).play(F4, 200).play(E4, 200).play(D4, 200)
+                                      .play(C4, 200)
+        .close();
 	}
 }
